@@ -7,7 +7,7 @@ import { MaterialCard } from "@/components/MaterialCard";
 import { useState } from "react";
 import { FilterTabs } from "@/components/FilterTabs";
 
-export const Route = createFileRoute("/materials/index")({
+export const Route = createFileRoute("/materials/")({
   component: MaterialsPage,
 });
 

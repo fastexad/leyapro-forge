@@ -8,7 +8,7 @@ import { useState } from "react";
 import { FilterTabs } from "@/components/FilterTabs";
 import { projectCategories, ProjectCategory } from "@/data/projects";
 
-export const Route = createFileRoute("/objects/index")({
+export const Route = createFileRoute("/objects/")({
   component: ObjectsPage,
 });
 
