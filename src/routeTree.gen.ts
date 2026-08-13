@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BridgesRouteImport } from './routes/bridges'
+import { Route as CompanyRouteImport } from './routes/company'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as DigitalCabinetRouteImport } from './routes/digital-cabinet'
+import { Route as TechnologiesRouteImport } from './routes/technologies'
+import { Route as MaterialsIndexRouteImport } from './routes/materials.index'
+import { Route as MaterialsSlugRouteImport } from './routes/materials.$slug'
+import { Route as ObjectsIndexRouteImport } from './routes/objects.index'
+import { Route as ObjectsSlugRouteImport } from './routes/objects.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BridgesRoute = BridgesRouteImport.update({
+  id: '/bridges',
+  path: '/bridges',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanyRoute = CompanyRouteImport.update({
+  id: '/company',
+  path: '/company',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DigitalCabinetRoute = DigitalCabinetRouteImport.update({
+  id: '/digital-cabinet',
+  path: '/digital-cabinet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnologiesRoute = TechnologiesRouteImport.update({
+  id: '/technologies',
+  path: '/technologies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaterialsIndexRoute = MaterialsIndexRouteImport.update({
+  id: '/materials/',
+  path: '/materials/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaterialsSlugRoute = MaterialsSlugRouteImport.update({
+  id: '/materials/$slug',
+  path: '/materials/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObjectsIndexRoute = ObjectsIndexRouteImport.update({
+  id: '/objects/',
+  path: '/objects/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObjectsSlugRoute = ObjectsSlugRouteImport.update({
+  id: '/objects/$slug',
+  path: '/objects/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bridges': typeof BridgesRoute
+  '/company': typeof CompanyRoute
+  '/contacts': typeof ContactsRoute
+  '/digital-cabinet': typeof DigitalCabinetRoute
+  '/technologies': typeof TechnologiesRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
+  '/objects/$slug': typeof ObjectsSlugRoute
+  '/materials/': typeof MaterialsIndexRoute
+  '/objects/': typeof ObjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bridges': typeof BridgesRoute
+  '/company': typeof CompanyRoute
+  '/contacts': typeof ContactsRoute
+  '/digital-cabinet': typeof DigitalCabinetRoute
+  '/technologies': typeof TechnologiesRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
+  '/objects/$slug': typeof ObjectsSlugRoute
+  '/materials': typeof MaterialsIndexRoute
+  '/objects': typeof ObjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bridges': typeof BridgesRoute
+  '/company': typeof CompanyRoute
+  '/contacts': typeof ContactsRoute
+  '/digital-cabinet': typeof DigitalCabinetRoute
+  '/technologies': typeof TechnologiesRoute
+  '/materials/$slug': typeof MaterialsSlugRoute
+  '/objects/$slug': typeof ObjectsSlugRoute
+  '/materials/': typeof MaterialsIndexRoute
+  '/objects/': typeof ObjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bridges'
+    | '/company'
+    | '/contacts'
+    | '/digital-cabinet'
+    | '/technologies'
+    | '/materials/$slug'
+    | '/objects/$slug'
+    | '/materials/'
+    | '/objects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bridges'
+    | '/company'
+    | '/contacts'
+    | '/digital-cabinet'
+    | '/technologies'
+    | '/materials/$slug'
+    | '/objects/$slug'
+    | '/materials'
+    | '/objects'
+  id:
+    | '__root__'
+    | '/'
+    | '/bridges'
+    | '/company'
+    | '/contacts'
+    | '/digital-cabinet'
+    | '/technologies'
+    | '/materials/$slug'
+    | '/objects/$slug'
+    | '/materials/'
+    | '/objects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BridgesRoute: typeof BridgesRoute
+  CompanyRoute: typeof CompanyRoute
+  ContactsRoute: typeof ContactsRoute
+  DigitalCabinetRoute: typeof DigitalCabinetRoute
+  TechnologiesRoute: typeof TechnologiesRoute
+  MaterialsSlugRoute: typeof MaterialsSlugRoute
+  ObjectsSlugRoute: typeof ObjectsSlugRoute
+  MaterialsIndexRoute: typeof MaterialsIndexRoute
+  ObjectsIndexRoute: typeof ObjectsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bridges': {
+      id: '/bridges'
+      path: '/bridges'
+      fullPath: '/bridges'
+      preLoaderRoute: typeof BridgesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company': {
+      id: '/company'
+      path: '/company'
+      fullPath: '/company'
+      preLoaderRoute: typeof CompanyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/digital-cabinet': {
+      id: '/digital-cabinet'
+      path: '/digital-cabinet'
+      fullPath: '/digital-cabinet'
+      preLoaderRoute: typeof DigitalCabinetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technologies': {
+      id: '/technologies'
+      path: '/technologies'
+      fullPath: '/technologies'
+      preLoaderRoute: typeof TechnologiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materials/': {
+      id: '/materials/'
+      path: '/materials'
+      fullPath: '/materials/'
+      preLoaderRoute: typeof MaterialsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/materials/$slug': {
+      id: '/materials/$slug'
+      path: '/materials/$slug'
+      fullPath: '/materials/$slug'
+      preLoaderRoute: typeof MaterialsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/objects/': {
+      id: '/objects/'
+      path: '/objects'
+      fullPath: '/objects/'
+      preLoaderRoute: typeof ObjectsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/objects/$slug': {
+      id: '/objects/$slug'
+      path: '/objects/$slug'
+      fullPath: '/objects/$slug'
+      preLoaderRoute: typeof ObjectsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BridgesRoute: BridgesRoute,
+  CompanyRoute: CompanyRoute,
+  ContactsRoute: ContactsRoute,
+  DigitalCabinetRoute: DigitalCabinetRoute,
+  TechnologiesRoute: TechnologiesRoute,
+  MaterialsSlugRoute: MaterialsSlugRoute,
+  ObjectsSlugRoute: ObjectsSlugRoute,
+  MaterialsIndexRoute: MaterialsIndexRoute,
+  ObjectsIndexRoute: ObjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -5,10 +5,11 @@ export type NavItem = {
 };
 
 export const navigation: NavItem[] = [
-  { id: "bridges", label: "Мосты", href: "#bridges" },
-  { id: "projects", label: "Объекты", href: "#projects" },
-  { id: "materials", label: "Материалы", href: "#materials" },
-  { id: "digital", label: "Цифровой кабинет", href: "#digital" },
-  { id: "about", label: "О компании", href: "#about" },
-  { id: "contacts", label: "Контакты", href: "#contacts" },
+  { id: "objects", label: "Объекты", href: "/objects" },
+  { id: "bridges", label: "Мосты", href: "/bridges" },
+  { id: "materials", label: "Материалы", href: "/materials" },
+  { id: "digital", label: "Цифровой кабинет", href: "/digital-cabinet" },
+  { id: "company", label: "О компании", href: "/company" },
+  { id: "technologies", label: "Технологии", href: "/technologies" },
+  { id: "contacts", label: "Контакты", href: "/contacts" },
 ];

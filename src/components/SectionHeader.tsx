@@ -1,20 +1,50 @@
+import { motion } from "framer-motion";
+
 type SectionHeaderProps = {
-  index?: string;
-  eyebrow?: string;
+  index?: string | undefined;
+  eyebrow?: string | undefined;
   title: string;
-  description?: string;
+  description?: string | undefined;
+  light?: boolean | undefined;
 };
 
-export function SectionHeader({ index, eyebrow, title, description }: SectionHeaderProps) {
+
+export function SectionHeader({ index, eyebrow, title, description, light }: SectionHeaderProps) {
   return (
-    <div className="max-w-2xl">
-      <div className="flex items-center gap-3">
-        {index ? <span className="label-mono text-orange">{index}</span> : null}
-        {eyebrow ? <span className="label-mono">{eyebrow}</span> : null}
+    <div className="max-w-3xl">
+      <div className="flex items-center gap-4">
+        {index && (
+          <span className="text-[10px] label-mono text-orange flex items-center gap-2">
+            <span className="w-4 h-[1px] bg-orange/50" />
+            {index}
+          </span>
+        )}
+        {eyebrow && (
+          <span className="text-[10px] label-mono uppercase tracking-[0.3em] text-muted-foreground">
+            {eyebrow}
+          </span>
+        )}
       </div>
-      <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">{title}</h2>
-      <div className="mt-4 h-px w-16 bg-orange" />
-      {description ? <p className="mt-4 text-muted-foreground">{description}</p> : null}
+      <motion.h2 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`mt-4 text-3xl font-display font-bold sm:text-5xl uppercase tracking-tight ${light ? 'text-white' : 'text-foreground'}`}
+      >
+        {title}
+      </motion.h2>
+      <motion.div 
+        initial={{ width: 0 }}
+        whileInView={{ width: 64 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="mt-6 h-1 bg-orange" 
+      />
+      {description && (
+        <p className="mt-8 text-lg text-muted-foreground leading-relaxed max-w-2xl">
+          {description}
+        </p>
+      )}
     </div>
   );
 }
+
