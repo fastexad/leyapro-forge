@@ -71,10 +71,7 @@ export function Hero() {
       </div>
 
       {/* Floating technical detail */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+      <div 
         className="absolute bottom-12 right-12 z-30 hidden xl:block border-l border-orange/50 pl-6"
       >
         <p className="text-[10px] label-mono text-orange mb-1">PROJECT_STATUS: BRIDGE_DECK_PREP</p>
