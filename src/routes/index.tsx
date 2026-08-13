@@ -11,7 +11,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { MaterialCard } from "@/components/MaterialCard";
 import { FilterTabs } from "@/components/FilterTabs";
 import { DigitalDashboardPreview } from "@/components/DigitalDashboardPreview";
-import { BridgeAbstract } from "@/components/BridgeAbstract";
+
 
 import { projects, projectCategories, ProjectCategory } from "@/data/projects";
 import { materials, materialCategories, MaterialCategory } from "@/data/materials";
@@ -73,11 +73,21 @@ function Index() {
       <main>
         <Hero />
 
-        <Section id="bridges" muted>
+        <Section id="indicators" muted>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.id} className="panel p-6 border-l-2 border-l-orange">
+                <p className="font-display text-4xl text-white font-bold">{stat.value}</p>
+                <p className="mt-2 text-[10px] label-mono">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+
           <SectionHeader
             index="01"
             eyebrow="Наша основная среда"
-            title="Мосты и путепроводы"
+            title="Мосты — наша основная среда"
             description="Мостовые сооружения — основная специализация СК ЛЕЯ. Мы работаем с металлическими пролётными строениями, фермами, балками, связями, опорами, железобетоном, старым ЛКП, коррозией, сложным доступом и жёсткими требованиями технадзора."
           />
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
