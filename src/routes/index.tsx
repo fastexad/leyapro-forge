@@ -84,7 +84,8 @@ function Index() {
           </div>
         </Section>
 
-          <SectionHeader
+        <Section id="bridges">
+
             index="01"
             eyebrow="Наша основная среда"
             title="Мосты — наша основная среда"
