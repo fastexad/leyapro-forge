@@ -2,10 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { HeroVisual } from "@/components/HeroVisual";
+import heroAsset from "@/assets/hero-bridge.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { CheckCircle2, ShieldCheck, Zap, Maximize, Ruler, FileText } from "lucide-react";
 
@@ -15,10 +15,11 @@ export const Route = createFileRoute("/bridges")({
 
 function BridgesPage() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-  const y2 = useTransform(scrollY, [0, 500], [0, -80]);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 150 };
+  const imgX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
+  const imgY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return;
@@ -91,8 +92,15 @@ function BridgesPage() {
                    </Button>
                 </div>
               </motion.div>
-              <div className="hidden lg:block opacity-60">
-                <HeroVisual mouseX={mouseX} mouseY={mouseY} y2={y2} />
+              <div className="relative hidden lg:block h-[420px] overflow-hidden border border-white/10">
+                <motion.img
+                  src={heroAsset.url}
+                  alt="Мостовое пролётное строение"
+                  style={{ x: imgX, y: imgY }}
+                  className="absolute inset-0 h-full w-full scale-110 object-cover opacity-80"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-graphite-deep via-graphite-deep/40 to-transparent" />
+                <div className="tech-grid-fine absolute inset-0 opacity-10" />
               </div>
             </div>
           </div>
