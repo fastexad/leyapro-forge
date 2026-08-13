@@ -1,106 +1,173 @@
 import { Button } from "@/components/ui/button";
-import { BridgeAbstract } from "@/components/BridgeAbstract";
+import { BridgePerspective } from "@/components/BridgePerspective";
 import { siteConfig } from "@/config/siteConfig";
 import { Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { useRef, useEffect, useState } from "react";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -100]);
+  
+  // Parallax on scroll
+  const y1 = useTransform(scrollY, [0, 500], [0, 150]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -80]);
+  
+  // Parallax on mouse move
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const springConfig = { damping: 25, stiffness: 150 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
+  const translateX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-20, 20]), springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set((e.clientX - centerX) / rect.width);
+    mouseY.set((e.clientY - centerY) / rect.height);
+  };
+
+  const [particles, setParticles] = useState<{id: number, x: number, y: number, size: number, duration: number}[]>([]);
+
+  useEffect(() => {
+    setParticles([...Array(20)].map((_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2 + 1,
+      duration: Math.random() * 10 + 10
+    })));
+  }, []);
 
   return (
-    <section ref={ref} className="relative min-h-[90vh] flex items-center overflow-hidden bg-graphite-deep pt-20">
-      {/* Background Layers for Pseudo-3D */}
-      <div className="tech-grid pointer-events-none absolute inset-0 opacity-40" />
+    <section 
+      ref={ref} 
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[95vh] flex items-center overflow-hidden bg-graphite-deep pt-20"
+    >
+      {/* 1. Deepest Layer: Tech Grid & Base Glow */}
+      <div className="tech-grid pointer-events-none absolute inset-0 opacity-20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-graphite-deep" />
       
+      {/* 2. Middle Layer: Background Glows & Particles */}
       <motion.div 
         style={{ y: y1 }}
-        className="pointer-events-none absolute top-1/4 left-1/4 h-[500px] w-[500px] rounded-full bg-orange/10 blur-[120px]" 
+        className="pointer-events-none absolute top-1/4 left-1/3 h-[600px] w-[600px] rounded-full bg-orange/5 blur-[140px]" 
       />
-      <motion.div 
-        style={{ y: y2 }}
-        className="pointer-events-none absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full bg-steel/5 blur-[100px]" 
-      />
+      
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          className="absolute rounded-full bg-orange/30 pointer-events-none"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={{
+            y: [0, -40, 0],
+            x: [0, 20, 0],
+            opacity: [0, 0.6, 0]
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      ))}
 
-      {/* Blueprint Grid Lines */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20">
-        <div className="absolute top-1/4 w-full h-px bg-steel/30" />
-        <div className="absolute top-2/4 w-full h-px bg-steel/30" />
-        <div className="absolute left-1/3 h-full w-px bg-steel/30" />
-        <div className="absolute left-2/3 h-full w-px bg-steel/30" />
+      {/* 3. Structural Layer: Blueprint Lines */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-10">
+        <div className="absolute top-[20%] w-full h-[1px] bg-steel/50" />
+        <div className="absolute top-[60%] w-full h-[1px] bg-steel/50" />
+        <div className="absolute left-[20%] h-full w-[1px] bg-steel/50" />
+        <div className="absolute left-[70%] h-full w-[1px] bg-steel/50" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 w-full">
+      <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 w-full z-10 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Left Side: Text Content */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="label-mono text-orange flex items-center gap-2">
-            <span className="h-px w-8 bg-orange" />
-            {siteConfig.legalName}
-          </span>
+          <div className="inline-flex items-center gap-3 px-3 py-1 bg-white/5 border border-white/10 rounded-full mb-8">
+            <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
+            <span className="text-[10px] label-mono uppercase tracking-[0.2em] text-white">
+              {siteConfig.legalName} // Industrial Engineering
+            </span>
+          </div>
           
-          <h1 className="mt-8 max-w-4xl text-4xl font-display font-bold leading-[1.05] sm:text-7xl uppercase tracking-tight">
-            Делаем из сложных конструкций объекты, <span className="text-orange">которые можно показать</span>, сдать и эксплуатировать годами
+          <h1 className="text-5xl font-display font-bold leading-[0.95] sm:text-8xl uppercase tracking-tighter text-white">
+            Инженерия <br />
+            <span className="text-orange">Металла</span> <br />
+            и Мостов
           </h1>
           
-          <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Мосты, металл, железобетон, антикоррозионная защита, огнезащита, гидроизоляция, подбор материалов, ПТО и исполнительная документация под ключ.
+          <p className="mt-8 max-w-xl text-lg text-muted-foreground leading-relaxed">
+            Специализированная защита пролетных строений, антикоррозионная обработка и промышленный альпинизм. Технологии Sa 2.5 / Sa 3 с гарантией по ГОСТ.
           </p>
 
           <div className="mt-12 flex flex-wrap gap-4">
-            <Button asChild variant="industrial" size="lg" className="h-14 px-8 text-base">
-              <Link to="/objects">Смотреть объекты</Link>
+            <Button asChild variant="industrial" size="lg" className="h-14 px-10 text-[10px] uppercase tracking-[0.2em] font-bold shadow-[0_0_20px_rgba(255,120,40,0.2)]">
+              <Link to="/objects">Каталог объектов</Link>
             </Button>
-            <Button asChild variant="steel" size="lg" className="h-14 px-8 text-base">
-              <Link to="/contacts">Рассчитать проект</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="h-14 px-8 text-base border-white/10 hover:bg-white/5">
-              <Link to="/digital-cabinet">Кабинет заказчика</Link>
+            <Button asChild variant="steel" size="lg" className="h-14 px-10 text-[10px] uppercase tracking-[0.2em] font-bold bg-white/5 border-white/10 text-white hover:bg-white/10">
+              <Link to="/technologies">Технологии</Link>
             </Button>
           </div>
         </motion.div>
 
-        {/* Stats Summary Panel */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-12"
-        >
-          <div>
-            <p className="text-3xl font-display font-bold text-orange">80%</p>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Объектов — мосты</p>
-          </div>
-          <div>
-            <p className="text-3xl font-display font-bold text-white">30 лет</p>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Практического опыта</p>
-          </div>
-          <div>
-            <p className="text-3xl font-display font-bold text-white">РФ</p>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Работаем по всей стране</p>
-          </div>
-          <div>
-            <p className="text-3xl font-display font-bold text-steel">Digital</p>
-            <p className="text-[10px] uppercase tracking-widest text-muted-foreground mt-1">Цифровой контроль</p>
-          </div>
-        </motion.div>
+        {/* Right Side: Pseudo-3D Bridge Perspective */}
+        <div className="relative h-[500px] lg:h-[700px] flex items-center justify-center">
+          <motion.div
+            style={{ 
+              rotateX, 
+              rotateY,
+              x: translateX,
+              y: y2
+            }}
+            className="relative w-full h-full flex items-center justify-center perspective-[1000px]"
+          >
+            {/* The Bridge Silhouette */}
+            <BridgePerspective className="w-[120%] h-auto text-steel/40 drop-shadow-[0_0_30px_rgba(255,120,40,0.1)]" />
+            
+            {/* Sandblasting Dust Effect (Bottom Right) */}
+            <motion.div 
+              className="absolute -bottom-10 right-0 w-[300px] h-[200px] bg-gradient-radial from-orange/10 to-transparent blur-3xl"
+              animate={{
+                opacity: [0.3, 0.5, 0.3],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{ duration: 5, repeat: Infinity }}
+            />
+          </motion.div>
 
-        {/* Bridge Abstract SVG for Parallax/Pseudo-3D */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ delay: 0.3, duration: 1.5 }}
-          className="absolute -right-20 bottom-0 pointer-events-none hidden lg:block"
-        >
-          <BridgeAbstract className="w-[800px] text-steel/30" />
-        </motion.div>
+          {/* Floating UI Elements */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute top-1/4 right-0 panel p-4 bg-black/60 border-orange/20 backdrop-blur-md hidden xl:block"
+          >
+            <p className="text-[9px] label-mono text-orange mb-2">PROCESS_MONITOR: ACTIVE</p>
+            <div className="flex gap-1">
+              {[...Array(12)].map((_, i) => (
+                <div key={i} className={`h-3 w-1 ${i < 8 ? 'bg-orange' : 'bg-white/10'}`} />
+              ))}
+            </div>
+            <p className="text-[10px] text-white mt-3 font-bold">AKZ_PROGRESS: 84%</p>
+          </motion.div>
+        </div>
       </div>
 
+      {/* Hidden command string for context */}
       <span className="sr-only">'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
                                         
                                             
@@ -108,3 +175,4 @@ export function Hero() {
     </section>
   );
 }
+
