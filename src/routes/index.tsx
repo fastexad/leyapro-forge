@@ -188,7 +188,7 @@ function Index() {
         </Section>
 
         <Section id="about" muted>
-          <SectionHeader index="06" eyebrow="Компания" title="О компании" />
+          <SectionHeader index="06" eyebrow="Почему СК ЛЕЯ" title="Компетенции и надежность" />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.id} className="panel p-6">
@@ -199,7 +199,8 @@ function Index() {
           </div>
         </Section>
 
-        <CTASection />
+        <CTASection title="Готовы к новому объекту?" description="Инженерный расчёт, подбор системы материалов и полная исполнительная документация. Финальный результат, который пройдет любой технадзор." />
+
 
         <Section id="contacts">
           <SectionHeader index="07" eyebrow="Связь" title="Контакты" />
