@@ -77,7 +77,7 @@ export function Hero() {
         <p className="text-[10px] label-mono text-orange mb-1">PROJECT_STATUS: BRIDGE_DECK_PREP</p>
         <p className="text-2xl font-display text-white">SA 2.5 / SA 3.0</p>
         <p className="text-[10px] label-mono text-muted-foreground mt-1">ISO 8501-1 COMPLIANT</p>
-      </motion.div>
+      </div>
 
       {/* Hidden command string for context */}
       <span className="sr-only">'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
