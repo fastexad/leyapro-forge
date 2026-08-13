@@ -61,6 +61,17 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme {
+  --color-orange: var(--orange);
+  --color-copper: var(--copper);
+  --color-steel: var(--steel);
+  --color-graphite: var(--graphite);
+  --color-graphite-deep: var(--graphite-deep);
+  --font-display: "Oswald", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
 /* LEYA industrial dark design system — dark is the only mode. */
 :root {
   --radius: 0.25rem;
