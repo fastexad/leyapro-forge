@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/objects/index")({
+export const Route = createFileRoute("/objects/")({
   component: ObjectsPage,
 });
 
