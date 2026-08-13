@@ -84,13 +84,14 @@ function Index() {
           </div>
         </Section>
 
-        <Section id="bridges">
-
+        <Section id="bridges" muted>
+          <SectionHeader
             index="01"
             eyebrow="Наша основная среда"
             title="Мосты — наша основная среда"
             description="Мостовые сооружения — основная специализация СК ЛЕЯ. Мы работаем с металлическими пролётными строениями, фермами, балками, связями, опорами, железобетоном, старым ЛКП, коррозией, сложным доступом и жёсткими требованиями технадзора."
           />
+
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
               <motion.div 
