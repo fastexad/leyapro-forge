@@ -1,0 +1,12 @@
+{
+  "name": "СК ЛЕЯ",
+  "short_name": "ЛЕЯ",
+  "description": "Защита мостов и промышленных конструкций под ключ",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#111318",
+  "background_color": "#111318",
+  "display": "standalone"
+}

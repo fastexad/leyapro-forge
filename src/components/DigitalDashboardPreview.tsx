@@ -65,13 +65,12 @@ export function DigitalDashboardPreview() {
                  
                  {/* Mock Chart Lines */}
                  <div className="h-32 flex items-end gap-1">
-                   {Array.from({ length: 30 }).map((_, i) => {
-                     const planHeight = 40 + Math.sin(i * 0.5) * 20;
-                     const factHeight = planHeight * (0.8 + Math.random() * 0.4);
+                   {[52, 57, 63, 68, 72, 76, 71, 69, 74, 79, 83, 78, 81, 86, 88, 84, 89, 93, 90, 87, 91, 95, 92, 96, 98, 94, 97, 100, 96, 99].map((planHeight, i) => {
+                     const factHeights = [46, 54, 58, 61, 67, 72, 65, 64, 71, 74, 80, 73, 78, 82, 85, 79, 83, 89, 86, 84, 88, 92, 90, 93, 96, 91, 95, 98, 94, 97];
                      return (
                        <div key={i} className="flex-1 flex flex-col justify-end gap-[1px]">
                          <div style={{ height: `${planHeight}%` }} className="bg-steel/20 w-full" />
-                         <div style={{ height: `${factHeight}%` }} className="bg-orange/50 w-full" />
+                         <div style={{ height: `${factHeights[i]}%` }} className="bg-orange/50 w-full" />
                        </div>
                      );
                    })}

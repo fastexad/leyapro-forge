@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import heroAsset from "@/assets/hero-bridge.png.asset.json";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
@@ -94,7 +93,7 @@ function BridgesPage() {
               </motion.div>
               <div className="relative hidden lg:block h-[420px] overflow-hidden border border-white/10">
                 <motion.img
-                  src={heroAsset.url}
+                  src="/hero-bridge.png"
                   alt="Мостовое пролётное строение"
                   style={{ x: imgX, y: imgY }}
                   className="absolute inset-0 h-full w-full scale-110 object-cover opacity-80"
