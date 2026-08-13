@@ -19,9 +19,9 @@ import { services } from "@/data/services";
 import { stats } from "@/data/stats";
 import { siteConfig } from "@/config/siteConfig";
 
-const title = "ООО СК «ЛЕЯ» — мостовое и промышленное строительство";
+const title = "СК ЛЕЯ — защита мостов и промышленных конструкций под ключ";
 const description =
-  "СК «ЛЕЯ»: строительство мостов и инженерных сооружений, собственные материалы, цифровой контроль объектов.";
+  "Антикоррозионная защита, огнезащита, гидроизоляция, подбор материалов, ПТО и исполнительная документация для мостов и промышленных объектов по России";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,8 +30,10 @@ export const Route = createFileRoute("/")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:image", content: "/__l5e/assets-v1/0e7c486b-9240-4dd6-a039-17d2f9be99e2/hero-bridge.png" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/__l5e/assets-v1/0e7c486b-9240-4dd6-a039-17d2f9be99e2/hero-bridge.png" },
     ],
   }),
   component: Index,

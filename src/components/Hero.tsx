@@ -36,11 +36,7 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 w-full z-20">
         <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="z-20">
             <div className="inline-flex items-center gap-3 px-3 py-1 bg-white/5 border border-white/10 rounded-sm mb-8">
               <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
               <span className="text-[10px] label-mono uppercase tracking-[0.2em] text-white">
@@ -70,21 +66,18 @@ export function Hero() {
                 <Link to="/digital-cabinet">Кабинет заказчика</Link>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Floating technical detail */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+      <div 
         className="absolute bottom-12 right-12 z-30 hidden xl:block border-l border-orange/50 pl-6"
       >
         <p className="text-[10px] label-mono text-orange mb-1">PROJECT_STATUS: BRIDGE_DECK_PREP</p>
         <p className="text-2xl font-display text-white">SA 2.5 / SA 3.0</p>
         <p className="text-[10px] label-mono text-muted-foreground mt-1">ISO 8501-1 COMPLIANT</p>
-      </motion.div>
+      </div>
 
       {/* Hidden command string for context */}
       <span className="sr-only">'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
