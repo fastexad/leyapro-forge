@@ -34,6 +34,8 @@ export function HeroBridgeBackground({ mouseX, mouseY, y2 }: HeroBridgeBackgroun
           <img 
             src={heroAsset.url} 
             alt="Bridge Infrastructure" 
+            loading="eager"
+            fetchPriority="high"
             className="absolute right-0 top-0 h-full w-full lg:w-[85%] object-cover object-center lg:object-right opacity-80"
           />
           

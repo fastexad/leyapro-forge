@@ -36,11 +36,7 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 w-full z-20">
         <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="z-20">
             <div className="inline-flex items-center gap-3 px-3 py-1 bg-white/5 border border-white/10 rounded-sm mb-8">
               <span className="w-2 h-2 rounded-full bg-orange animate-pulse" />
               <span className="text-[10px] label-mono uppercase tracking-[0.2em] text-white">
@@ -70,7 +66,7 @@ export function Hero() {
                 <Link to="/digital-cabinet">Кабинет заказчика</Link>
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
