@@ -12,8 +12,8 @@ import { FilterTabs } from "@/components/FilterTabs";
 import { DigitalDashboardPreview } from "@/components/DigitalDashboardPreview";
 import { BridgeAbstract } from "@/components/BridgeAbstract";
 
-import { projects, projectCategories } from "@/data/projects";
-import { materials, materialCategories } from "@/data/materials";
+import { projects, projectCategories, ProjectCategory } from "@/data/projects";
+import { materials, materialCategories, MaterialCategory } from "@/data/materials";
 import { services } from "@/data/services";
 import { stats } from "@/data/stats";
 import { siteConfig } from "@/config/siteConfig";
@@ -53,13 +53,18 @@ function Section({
 }
 
 function Index() {
-  const [projectFilter, setProjectFilter] = useState("all");
-  const [materialFilter, setMaterialFilter] = useState("all");
+  const [projectFilter, setProjectFilter] = useState<ProjectCategory>("all");
+  const [materialFilter, setMaterialFilter] = useState<MaterialCategory>("all");
 
   const visibleProjects =
-    projectFilter === "all" ? projects : projects.filter((p) => p.category === projectFilter);
+    projectFilter === "all" 
+      ? projects 
+      : projects.filter((p) => p.category.includes(projectFilter));
+  
   const visibleMaterials =
-    materialFilter === "all" ? materials : materials.filter((m) => m.category === materialFilter);
+    materialFilter === "all" 
+      ? materials 
+      : materials.filter((m) => m.category === materialFilter);
 
   return (
     <div className="min-h-screen bg-background">
@@ -95,7 +100,7 @@ function Index() {
             <FilterTabs
               tabs={projectCategories}
               active={projectFilter}
-              onChange={setProjectFilter}
+              onChange={(val) => setProjectFilter(val as ProjectCategory)}
             />
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -111,7 +116,7 @@ function Index() {
             <FilterTabs
               tabs={materialCategories}
               active={materialFilter}
-              onChange={setMaterialFilter}
+              onChange={(val) => setMaterialFilter(val as MaterialCategory)}
             />
           </div>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
