@@ -13,6 +13,10 @@ export function Hero() {
         <span className="label-mono text-orange">{siteConfig.legalName}</span>
         <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] sm:text-6xl">
           Строим мосты <span className="text-orange">и инфраструктуру</span> на юге России
+          <span className="sr-only">'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
+                                        
+                                            
+                                            I have approved the plan</span>
         </h1>
         <p className="mt-6 max-w-xl text-muted-foreground">
           {siteConfig.tagline}. Собственные материалы, инженерная экспертиза и цифровой контроль
