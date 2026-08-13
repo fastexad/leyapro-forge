@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -143,7 +144,7 @@ function Index() {
 
 
         <Section id="projects">
-          <SectionHeader index="02" eyebrow="Портфолио" title="Объекты" />
+          <SectionHeader index="03" eyebrow="Портфолио" title="Объекты" />
           <div className="mt-8">
             <FilterTabs
               tabs={projectCategories}
@@ -159,7 +160,7 @@ function Index() {
         </Section>
 
         <Section id="materials" muted>
-          <SectionHeader index="03" eyebrow="Производство" title="Материалы" />
+          <SectionHeader index="04" eyebrow="Производство" title="Материалы" description="Мы не выбираем материал случайно. Система защиты подбирается под объект, среду эксплуатации, проектные требования, срок службы и экономику производства работ." />
           <div className="mt-8">
             <FilterTabs
               tabs={materialCategories}
@@ -176,10 +177,10 @@ function Index() {
 
         <Section id="digital">
           <SectionHeader
-            index="04"
+            index="05"
             eyebrow="Прозрачность"
-            title="Цифровой кабинет"
-            description="Онлайн-контроль хода работ — раздел в разработке."
+            title="Цифровой контроль"
+            description="Заказчик видит не обещания, а ход работ в режиме реального времени."
           />
           <div className="mt-10">
             <DigitalDashboardPreview />
@@ -187,7 +188,7 @@ function Index() {
         </Section>
 
         <Section id="about" muted>
-          <SectionHeader index="05" eyebrow="Компания" title="О компании" />
+          <SectionHeader index="06" eyebrow="Компания" title="О компании" />
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.id} className="panel p-6">
@@ -201,7 +202,7 @@ function Index() {
         <CTASection />
 
         <Section id="contacts">
-          <SectionHeader index="06" eyebrow="Связь" title="Контакты" />
+          <SectionHeader index="07" eyebrow="Связь" title="Контакты" />
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             <div className="panel p-6">
               <p className="label-mono">Телефон</p>
