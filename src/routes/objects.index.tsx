@@ -23,13 +23,15 @@ function ObjectsPage() {
     <div className="min-h-screen bg-background pt-20">
       <Header />
       <main>
-        <section className="bg-graphite-deep py-20">
-          <div className="mx-auto max-w-7xl px-6">
+        <section className="bg-graphite-deep py-20 relative overflow-hidden">
+          <div className="tech-grid absolute inset-0 opacity-20" />
+          <div className="mx-auto max-w-7xl px-6 relative">
             <SectionHeader 
               eyebrow="Портфолио" 
               title="Наши объекты" 
               description="Опыт участия команды в проектах федерального уровня и работа на инфраструктурных объектах повышенной сложности."
             />
+
             
             <div className="mt-12">
               <FilterTabs 
