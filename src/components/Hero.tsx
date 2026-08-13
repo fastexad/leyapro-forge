@@ -27,7 +27,7 @@ export function Hero() {
           </Button>
         </div>
 
-        <BridgeAbstract className="mt-16 w-full text-steel" />
+        <BridgeAbstract className="mt-16 h-56 w-full text-steel sm:h-72" />
       </div>
     </section>
   );
