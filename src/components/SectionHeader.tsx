@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 
 type SectionHeaderProps = {
-  index?: string;
-  eyebrow?: string;
+  index?: string | undefined;
+  eyebrow?: string | undefined;
   title: string;
-  description?: string;
-  light?: boolean;
+  description?: string | undefined;
+  light?: boolean | undefined;
 };
+
 
 export function SectionHeader({ index, eyebrow, title, description, light }: SectionHeaderProps) {
   return (
