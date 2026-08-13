@@ -22,13 +22,15 @@ function MaterialsPage() {
     <div className="min-h-screen bg-background pt-20">
       <Header />
       <main>
-        <section className="bg-graphite-deep py-20">
-          <div className="mx-auto max-w-7xl px-6">
+        <section className="bg-graphite-deep py-20 relative overflow-hidden">
+          <div className="tech-grid absolute inset-0 opacity-20" />
+          <div className="mx-auto max-w-7xl px-6 relative">
             <SectionHeader 
               eyebrow="Экспертиза" 
               title="Материалы и системы" 
               description="Мы подбираем системы защиты на основе 30-летнего практического опыта, учитывая среду эксплуатации и бюджет проекта."
             />
+
             
             <div className="mt-12">
               <FilterTabs 

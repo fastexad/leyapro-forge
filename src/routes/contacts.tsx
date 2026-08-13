@@ -15,13 +15,15 @@ function ContactsPage() {
     <div className="min-h-screen bg-background pt-20">
       <Header />
       <main>
-        <section className="bg-graphite-deep py-24">
-          <div className="mx-auto max-w-7xl px-6">
+        <section className="bg-graphite-deep py-24 relative overflow-hidden">
+          <div className="tech-grid absolute inset-0 opacity-20" />
+          <div className="mx-auto max-w-7xl px-6 relative">
             <SectionHeader 
               eyebrow="Связь" 
               title="Контакты и заявка" 
               description="Свяжитесь с нами для расчета проекта или получения консультации по технологиям защиты."
             />
+
             
             <div className="mt-16 grid lg:grid-cols-3 gap-12">
               <div className="lg:col-span-1 space-y-6">
