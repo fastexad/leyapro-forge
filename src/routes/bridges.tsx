@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { BridgeAbstract } from "@/components/BridgeAbstract";
+import { HeroVisual } from "@/components/HeroVisual";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue } from "framer-motion";
+import { useRef } from "react";
 import { CheckCircle2, ShieldCheck, Zap, Maximize, Ruler, FileText } from "lucide-react";
 
 export const Route = createFileRoute("/bridges")({
@@ -13,6 +14,21 @@ export const Route = createFileRoute("/bridges")({
 });
 
 function BridgesPage() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const y2 = useTransform(scrollY, [0, 500], [0, -80]);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set((e.clientX - centerX) / rect.width);
+    mouseY.set((e.clientY - centerY) / rect.height);
+  };
+
   const bridgeServices = [
     { 
       t: "Металлические пролётные строения", 
@@ -51,9 +67,13 @@ function BridgesPage() {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative bg-graphite-deep py-24 overflow-hidden">
+        <section 
+          ref={ref}
+          onMouseMove={handleMouseMove}
+          className="relative bg-graphite-deep py-24 overflow-hidden min-h-[70vh] flex items-center"
+        >
           <div className="tech-grid absolute inset-0 opacity-20" />
-          <div className="mx-auto max-w-7xl px-6 relative">
+          <div className="mx-auto max-w-7xl px-6 relative w-full z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -66,28 +86,31 @@ function BridgesPage() {
                   description="Мостовые сооружения требуют особого подхода из-за динамических нагрузок, агрессивной среды и жестких требований безопасности."
                 />
                 <div className="mt-10">
-                   <Button asChild variant="industrial" size="lg" className="h-14 px-8">
+                   <Button asChild variant="industrial" size="lg" className="h-14 px-8 text-[10px] uppercase tracking-[0.2em] font-bold">
                       <Link to="/contacts">Обсудить проект</Link>
                    </Button>
                 </div>
               </motion.div>
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 0.3, scale: 1 }}
-                className="hidden lg:block"
-              >
-                <BridgeAbstract className="w-full text-steel" />
-              </motion.div>
+              <div className="hidden lg:block opacity-60">
+                <HeroVisual mouseX={mouseX} mouseY={mouseY} y2={y2} />
+              </div>
             </div>
           </div>
         </section>
 
         {/* Expertise Grid */}
-        <section className="py-24">
+        <section className="py-24 relative">
            <div className="mx-auto max-w-7xl px-6">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                  {bridgeServices.map((s, i) => (
-                   <div key={i} className="panel p-8 hover:border-orange/30 transition-all group bg-white/[0.02]">
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="panel p-8 hover:border-orange/30 transition-all group bg-white/[0.02]"
+                    >
                       <s.icon className="w-8 h-8 text-orange mb-6" />
                       <h3 className="text-xl font-display font-bold text-white uppercase tracking-tight mb-4 group-hover:text-orange transition-colors">
                         {s.t}
@@ -95,14 +118,14 @@ function BridgesPage() {
                       <p className="text-muted-foreground text-sm leading-relaxed">
                         {s.d}
                       </p>
-                   </div>
+                    </motion.div>
                  ))}
               </div>
            </div>
         </section>
 
         {/* Technical Detail Section */}
-        <section className="py-24 bg-graphite border-y border-white/5">
+        <section className="py-24 bg-graphite border-y border-white/5 relative">
            <div className="mx-auto max-w-7xl px-6">
               <div className="grid lg:grid-cols-2 gap-16 items-center">
                  <div className="order-2 lg:order-1">
@@ -140,3 +163,4 @@ function BridgesPage() {
     </div>
   );
 }
+
