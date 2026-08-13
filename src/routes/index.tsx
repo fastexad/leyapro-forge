@@ -75,24 +75,72 @@ function Index() {
         <Section id="bridges" muted>
           <SectionHeader
             index="01"
-            eyebrow="Специализация"
-            title="Фокус на мостах"
-            description="Ключевое направление компании — мостовые сооружения и переходы."
+            eyebrow="Наша основная среда"
+            title="Мосты и путепроводы"
+            description="Мостовые сооружения — основная специализация СК ЛЕЯ. Мы работаем с металлическими пролётными строениями, фермами, балками, связями, опорами, железобетоном, старым ЛКП, коррозией, сложным доступом и жёсткими требованиями технадзора."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            <div className="panel relative overflow-hidden p-6">
-              <BridgeAbstract className="w-full text-steel" />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {services.map((service) => (
-                <div key={service.id} className="panel p-5">
-                  <h3 className="text-base font-semibold">{service.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{service.summary}</p>
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, i) => (
+              <motion.div 
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.05 }}
+                className="panel group p-6 hover:border-orange/30 transition-all"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="text-[10px] label-mono text-orange/50">0{i + 1}</span>
+                  <div className="h-px flex-1 bg-white/5" />
                 </div>
+                <h3 className="text-lg font-display font-semibold uppercase tracking-tight group-hover:text-orange transition-colors">{service.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{service.summary}</p>
+              </motion.div>
+            ))}
+          </div>
+        </Section>
+
+        <Section id="solutions">
+          <SectionHeader
+            index="02"
+            eyebrow="Процесс"
+            title="Комплексное решение под ключ"
+            description="Мы не просто красим — мы ведем объект от анализа ТЗ до сдачи технадзору."
+          />
+          <div className="mt-16 relative">
+            <div className="absolute left-8 top-0 bottom-0 w-px bg-white/5 hidden md:block" />
+            <div className="space-y-12">
+              {[
+                { t: "Изучаем ТЗ, проект и ведомости объёмов", d: "Глубокий технический аудит входящей документации." },
+                { t: "Анализируем конструкцию и условия эксплуатации", d: "Учет климатической зоны, агрессивности среды и нагрузок." },
+                { t: "Подбираем систему материалов", d: "Оптимизация по цене, качеству и сроку службы (до 25+ лет)." },
+                { t: "Планируем технологию и организацию работ", d: "Разработка ППР, графиков и схем доступа." },
+                { t: "Выполняем подготовку поверхности", d: "Абразивоструйная очистка Sa 2.5/3, обеспыливание, обезжиривание." },
+                { t: "Наносим защитные покрытия", d: "Соблюдение ТТК и рекомендаций производителей материалов." },
+                { t: "Контролируем параметры", d: "Замеры толщины (ТСП), адгезии, климатических условий (точка росы)." },
+                { t: "Ведём фотофиксацию и отчётность", d: "Прозрачный процесс работ в режиме реального времени." },
+                { t: "Закрываем исполнительную документацию", d: "Формирование полного пакета актов и журналов." },
+                { t: "Сдаём объект заказчику и технадзору", d: "Юридически безупречная передача выполненных работ." },
+              ].map((step, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex gap-8 relative"
+                >
+                  <div className="flex-none w-16 h-16 rounded-sm bg-graphite border border-white/10 flex items-center justify-center text-orange font-display text-xl z-10">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-display font-bold text-white uppercase tracking-tight">{step.t}</h3>
+                    <p className="mt-2 text-muted-foreground">{step.d}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </Section>
+
 
         <Section id="projects">
           <SectionHeader index="02" eyebrow="Портфолио" title="Объекты" />
