@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SectionHeader } from "@/components/SectionHeader";
 import { motion } from "framer-motion";
-import { Shield, Droplets, Flame, Hammer, Settings, FileCheck, Layers, Thermometer } from "lucide-react";
+import { Shield, Droplets, Flame, Hammer, Settings, FileCheck, Layers, Thermometer, Ruler, Clock, AlertCircle } from "lucide-react";
 
 export const Route = createFileRoute("/technologies")({
   component: TechnologiesPage,
@@ -112,4 +112,3 @@ function TechnologiesPage() {
   );
 }
 
-import { Ruler, Clock, AlertCircle } from "lucide-react";
