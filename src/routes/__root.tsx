@@ -77,19 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ООО СК «ЛЕЯ» — строительство мостов" },
+      { title: "СК ЛЕЯ — защита мостов и промышленных конструкций под ключ" },
       {
         name: "description",
-        content: "Строительная компания ЛЕЯ: мосты, инженерные сооружения, материалы.",
+        content: "Антикоррозионная защита, огнезащита, гидроизоляция, подбор материалов, ПТО и исполнительная документация для мостов и промышленных объектов по России",
       },
       { name: "author", content: "ООО СК «ЛЕЯ»" },
-      { property: "og:title", content: "ООО СК «ЛЕЯ» — строительство мостов" },
+      { property: "og:title", content: "СК ЛЕЯ — защита мостов и промышленных конструкций под ключ" },
       {
         property: "og:description",
-        content: "Строительная компания ЛЕЯ: мосты, инженерные сооружения, материалы.",
+        content: "Антикоррозионная защита, огнезащита, гидроизоляция, подбор материалов, ПТО и исполнительная документация для мостов и промышленных объектов по России",
       },
+      { property: "og:image", content: "/__l5e/assets-v1/0e7c486b-9240-4dd6-a039-17d2f9be99e2/hero-bridge.png" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/__l5e/assets-v1/0e7c486b-9240-4dd6-a039-17d2f9be99e2/hero-bridge.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
