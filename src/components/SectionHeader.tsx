@@ -46,3 +46,4 @@ export function SectionHeader({ index, eyebrow, title, description, light }: Sec
     </div>
   );
 }
+
